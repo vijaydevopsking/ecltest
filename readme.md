@@ -2,6 +2,9 @@
 **Overview**
 This guide provides detailed steps for using the provided AWS CloudFormation template to set up an AWS Elastic Beanstalk environment without SSL. This template automates the creation of the necessary AWS resources, including VPC, subnets, internet gateway, and Elastic Beanstalk configurations.
 
+Testing i have deployed in my person AWS account with out SSL THIS IS THE LINK TO TEST
+http://vijay2023.eba-pmzjh2tt.us-east-1.elasticbeanstalk.com/
+
 Prerequisites
 1. An AWS account with necessary permissions to create the resources outlined in the template.
 2. AWS CLI installed and configured on your local machine, or access to the AWS Management Console.
