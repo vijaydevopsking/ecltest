@@ -1,10 +1,16 @@
-Step-by-Step Guide for AWS CloudFormation Template
-Overview
+**Step-by-Step Guide for AWS CloudFormation Template**
+**Overview**
 This guide provides detailed steps for using the provided AWS CloudFormation template to set up an AWS Elastic Beanstalk environment without SSL. This template automates the creation of the necessary AWS resources, including VPC, subnets, internet gateway, and Elastic Beanstalk configurations.
 
 Prerequisites
-An AWS account with necessary permissions to create the resources outlined in the template.
-AWS CLI installed and configured on your local machine, or access to the AWS Management Console.
+1. An AWS account with necessary permissions to create the resources outlined in the template.
+2. AWS CLI installed and configured on your local machine, or access to the AWS Management Console.
+3. Type below command in your local to check the existing solutions available for elastik bean stack i have picked PHP you can pick as your reuirements this is manadatory step.
+    aws elasticbeanstalk list-available-solution-stacks
+4. Once you get the list please update in the template with your solution below line.
+SolutionStackName: 64bit Amazon Linux 2 v3.5.14 running PHP 8.1 (your solution name)
+ 
+   
 Steps
 1. Prepare the CloudFormation Template
 Download the provided CloudFormation template to your local system.
