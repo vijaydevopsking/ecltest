@@ -1,44 +1,50 @@
-**Step-by-Step Guide for AWS CloudFormation Template**
-**Overview**
-This guide provides detailed steps for using the provided AWS CloudFormation template to set up an AWS Elastic Beanstalk environment without SSL. This template automates the creation of the necessary AWS resources, including VPC, subnets, internet gateway, and Elastic Beanstalk configurations.
+# AWS Elastic Beanstalk CloudFormation Template
 
-Testing i have deployed in my person AWS account with out SSL THIS IS THE LINK TO TEST
-http://vijay2023.eba-pmzjh2tt.us-east-1.elasticbeanstalk.com/
+## Overview
+This CloudFormation template sets up an AWS Elastic Beanstalk environment to deploy a web application. It is configured to use an existing VPC and subnets and allows for customization of various parameters including instance types, auto-scaling settings, and the application source code location.
 
-Prerequisites
-1. An AWS account with necessary permissions to create the resources outlined in the template.
-2. AWS CLI installed and configured on your local machine, or access to the AWS Management Console.
-3. Type below command in your local to check the existing solutions available for elastik bean stack i have picked PHP you can pick as your reuirements this is manadatory step.
-    aws elasticbeanstalk list-available-solution-stacks
-4. Once you get the list please update in the template with your solution below line.
-SolutionStackName: 64bit Amazon Linux 2 v3.5.14 running PHP 8.1 (your solution name)
- 
-   
-Steps
-1. Prepare the CloudFormation Template
-Download the provided CloudFormation template to your local system.
-2. Upload the Template to AWS
-Log in to the AWS Management Console.
-Navigate to the CloudFormation service.
-Click on "Create stack" and select "With new resources (standard)".
-Choose "Upload a template file", click "Choose file", and select the downloaded template.
-Click "Next" to proceed.
-3. Configure Stack Details
-Enter a stack name. This name will be used to identify this particular stack within AWS CloudFormation.
-Since there are no parameters to configure in this template, click "Next" to proceed.
-4. Configure Stack Options
-Optionally, you can configure tags, permissions, and other advanced options. However, for most scenarios, you can leave these as default.
-Click "Next" to proceed.
-5. Review and Create the Stack
-Review the configurations to ensure everything is correct.
-Acknowledge that AWS CloudFormation might create IAM resources by checking the box at the bottom.
-Click "Create stack" to start the creation of the resources as defined in the template.
-6. Monitor the Stack Creation
-The AWS Management Console will display the stack status. Wait until the status changes to "CREATE_COMPLETE". This might take several minutes.
-In case of errors, AWS CloudFormation will roll back changes. Check the "Events" tab for logs to troubleshoot.
-7. Access the Elastic Beanstalk Environment
-Once the stack creation is complete, navigate to the Elastic Beanstalk service in the AWS Management Console.
-You should see the newly created application and environment. You can now deploy your application to this environment.
-8. Cleanup
-To delete the resources, return to the CloudFormation console.
-Select the stack you created, click "Delete", and confirm. AWS CloudFormation will then remove all resources associated with the stack
+## Prerequisites
+- AWS Account and AWS CLI configured with appropriate access.
+- An S3 bucket with the application source code.
+- Existing VPC and Subnet IDs where the Elastic Beanstalk environment will be deployed.
+
+## Template Parameters
+- `ApplicationName`: Name of the Elastic Beanstalk Application.
+- `EnvironmentName`: Name of the Elastic Beanstalk Environment.
+- `VPCId`: The ID of the existing VPC.
+- `SubnetIds`: The IDs of the existing subnets.
+- `InstanceType`: EC2 instance type for the Elastic Beanstalk environment.
+- `MinSize`: Minimum size of the Auto Scaling group.
+- `MaxSize`: Maximum size of the Auto Scaling group.
+- `ApplicationSourceBucket`: S3 bucket name where the application code is stored.
+- `ApplicationSourceKey`: S3 key (path) to the application code.
+- `SolutionStackName`: Solution stack name for the environment.
+
+## Usage
+1. **Prepare Your Application**: Make sure your application is packaged and uploaded to an S3 bucket. Note down the bucket name and the key (path) to the application file.
+
+2. **Set Up Parameters**: Fill in the parameters in the template. If you're not sure about the `SolutionStackName`, refer to the [AWS Documentation](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html) for available Elastic Beanstalk solution stacks.
+
+3. **Launch Stack**:
+   - Via AWS Management Console: Navigate to CloudFormation, create a new stack, and upload this template. Fill in the required parameters when prompted.
+   - Via AWS CLI: Use the `aws cloudformation create-stack` command with the necessary parameters.
+
+4. **Monitor Deployment**: Once the stack creation is initiated, you can monitor the progress in the AWS CloudFormation console. The deployment can take a few minutes to complete.
+
+5. **Access Your Application**: After successful deployment, you can access your application using the URL provided in the Outputs section of the CloudFormation stack.
+
+## Outputs
+- `ApplicationURL`: URL of the Elastic Beanstalk application.
+- `EnvironmentId`: ID of the Elastic Beanstalk environment.
+
+## Customization
+You can customize this template further as per your requirements. For more complex scenarios, such as adding database configurations or additional AWS services, modify the template accordingly.
+
+## Troubleshooting
+- Ensure that the IAM role has sufficient permissions.
+- Verify that the S3 bucket and application source key are correct and accessible.
+- Check the Elastic Beanstalk environment logs for specific application deployment issues.
+
+---
+
+This README should accompany your CloudFormation template and provides a basic guide for users to deploy their applications using your template. You can expand it with more detailed instructions or troubleshooting tips as needed.
